@@ -1,22 +1,41 @@
 import * as React from "react";
-import AspectRatio from "@mui/joy/AspectRatio";
 import Box from "@mui/joy/Box";
-import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
+import Avatar from "@mui/joy/Avatar";
 
 export default function ExpedientesSummary() {
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  const handleMouseOver = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovered(false);
+  };
+
+  const handleCardClick = () => {
+    console.log("Card clicked!");
+  };
+
   return (
     <Box
       sx={{
         width: "97%",
       }}
+      onClick={handleCardClick}
     >
       <Card
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
         orientation="horizontal"
         sx={{
+          cursor: isHovered ? "pointer" : "default",
+          boxShadow: isHovered ? "0 0 10px rgba(0, 0, 0, 0.3)" : "none",
+          transition: "box-shadow 0.3s ease-in-out",
           width: "100%",
           flexWrap: "wrap",
           [`& > *`]: {
@@ -27,27 +46,14 @@ export default function ExpedientesSummary() {
           resize: "horizontal",
         }}
       >
-        <AspectRatio flex ratio="1" maxHeight={182} sx={{ minWidth: 182 }}>
-          <img
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
-            srcSet="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286&dpr=2 2x"
-            loading="lazy"
-            alt=""
-          />
-        </AspectRatio>
+        <Avatar
+          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
+          sx={{ "--Avatar-size": isHovered ? "6rem" : "5rem", margin: "auto" }}
+        />
         <CardContent>
-          <Typography fontSize="xl" fontWeight="lg">
-            Alex Morrison
-          </Typography>
-          <Typography level="body-sm" fontWeight="lg" textColor="text.tertiary">
-            Cáncer de pulmón
-          </Typography>
-          <Typography level="body-sm" fontWeight="sm" textColor="text.tertiary">
-            Expediente actualizado hace 10 dias
-          </Typography>
           <Sheet
             sx={{
-              bgcolor: "background.level1",
+              bgcolor: isHovered ? "#FFB466" : "background.level1",
               borderRadius: "sm",
               p: 1.5,
               my: 1.5,
@@ -58,15 +64,9 @@ export default function ExpedientesSummary() {
           >
             <div>
               <Typography level="body-xs" fontWeight="lg">
-                Edad
+                Nombre
               </Typography>
-              <Typography fontWeight="lg">34</Typography>
-            </div>
-            <div>
-              <Typography level="body-xs" fontWeight="lg">
-                Telefono
-              </Typography>
-              <Typography fontWeight="lg">1234-5678</Typography>
+              <Typography fontWeight="lg">Alex Morrison</Typography>
             </div>
             <div>
               <Typography level="body-xs" fontWeight="lg">
@@ -80,13 +80,13 @@ export default function ExpedientesSummary() {
               </Typography>
               <Typography fontWeight="lg">Activo</Typography>
             </div>
+            <div>
+              <Typography level="body-xs" fontWeight="lg">
+                Ultima Actualizacion
+              </Typography>
+              <Typography fontWeight="lg">10 dias</Typography>
+            </div>
           </Sheet>
-
-          <Box sx={{ display: "flex", gap: 1.5, "& > button": { flex: 1 } }}>
-            {/* <Button variant="solid" color="primary">
-              Ver Expediente
-            </Button> */}
-          </Box>
         </CardContent>
       </Card>
     </Box>
