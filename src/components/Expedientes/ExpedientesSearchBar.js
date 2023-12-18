@@ -8,10 +8,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import "./ExpedientesSearchBar.css";
 
 const Search = styled("div")(({ theme }) => ({
+  borderRadius: "3rem",
   position: "relative",
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: "#DDD7F3",
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: "#CCC3ED",
   },
   marginLeft: 0,
   width: "100%",
@@ -51,7 +52,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function ExpedientesSearchBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ borderRadius: "3rem", color: "black" }}>
+      <AppBar
+        position="static"
+        elevation={0}
+        sx={{
+          borderRadius: "3rem",
+          color: "black",
+          backgroundColor: "inherit",
+        }}
+      >
         <Toolbar>
           <Search>
             <SearchIconWrapper>
