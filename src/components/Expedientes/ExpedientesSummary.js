@@ -6,7 +6,7 @@ import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import Avatar from "@mui/joy/Avatar";
 
-export default function ExpedientesSummary() {
+export default function ExpedientesSummary({ expediente }) {
   const [isHovered, setIsHovered] = React.useState(false);
 
   const handleMouseOver = () => {
@@ -47,7 +47,7 @@ export default function ExpedientesSummary() {
         }}
       >
         <Avatar
-          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
+          src={expediente.ImagenURL}
           sx={{ "--Avatar-size": isHovered ? "6rem" : "5rem", margin: "auto" }}
         />
         <CardContent>
@@ -66,25 +66,27 @@ export default function ExpedientesSummary() {
               <Typography level="body-xs" fontWeight="lg">
                 Nombre
               </Typography>
-              <Typography fontWeight="lg">Alex Morrison</Typography>
+              <Typography fontWeight="lg">{expediente.Nombre}</Typography>
             </div>
             <div>
               <Typography level="body-xs" fontWeight="lg">
                 Cedula
               </Typography>
-              <Typography fontWeight="lg">206947384</Typography>
+              <Typography fontWeight="lg">{expediente.Cedula}</Typography>
             </div>
             <div>
               <Typography level="body-xs" fontWeight="lg">
                 Estado
               </Typography>
-              <Typography fontWeight="lg">Activo</Typography>
+              <Typography fontWeight="lg">{expediente.Estado}</Typography>
             </div>
             <div>
               <Typography level="body-xs" fontWeight="lg">
                 Ultima Actualizacion
               </Typography>
-              <Typography fontWeight="lg">10 dias</Typography>
+              <Typography fontWeight="lg">
+                {expediente.UltimaActualizacion}
+              </Typography>
             </div>
           </Sheet>
         </CardContent>
