@@ -10,8 +10,7 @@ export default function ExpedienteInfo() {
       className="ExpedienteGrid"
       container
       direction="column"
-      justifyContent="flex-start"
-      spacing={2}
+      justifyContent="space-around"
     >
       <Grid>
         <Avatar

@@ -2,6 +2,7 @@ import React from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useParams } from "react-router-dom";
 import ExpedienteInfo from "./ExpedienteInfo";
+import ExpedienteSections from "./ExpedienteSections";
 
 export default function ExpedienteDetail() {
   let { id } = useParams();
@@ -11,7 +12,7 @@ export default function ExpedienteDetail() {
         <ExpedienteInfo />
       </Grid>
       <Grid xs={9}>
-        <h1>Hi</h1>
+        <ExpedienteSections />
       </Grid>
     </Grid>
   );
