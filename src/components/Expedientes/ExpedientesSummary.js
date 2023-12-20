@@ -5,9 +5,11 @@ import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import Avatar from "@mui/joy/Avatar";
+import { useNavigate } from "react-router-dom";
 
 export default function ExpedientesSummary({ expediente }) {
   const [isHovered, setIsHovered] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleMouseOver = () => {
     setIsHovered(true);
@@ -19,6 +21,7 @@ export default function ExpedientesSummary({ expediente }) {
 
   const handleCardClick = () => {
     console.log("Card clicked!");
+    navigate(`/expediente/${expediente.id}`);
   };
 
   return (

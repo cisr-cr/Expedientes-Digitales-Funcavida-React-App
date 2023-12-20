@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import ExpedientesContainer from "./components/Expedientes/ExpedientesContainer";
 import ExpedientesList from "./components/Expedientes/ExpedientesList";
-import ExpedientesDetail from "./components/Expedientes/ExpedientesDetail";
+import ExpedienteDetail from "./components/Expediente/ExpedienteDetail";
 import NoMatch from "./components/NoMatch";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ExpedientesContainer />}>
             <Route index element={<ExpedientesList />} />
-            <Route path="expediente" element={<ExpedientesDetail />} />
+            <Route path="expediente/:id" element={<ExpedienteDetail />} />
             <Route path="*" element={<NoMatch />} />
           </Route>
         </Routes>
