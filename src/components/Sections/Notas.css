@@ -1,0 +1,19 @@
+.Notas {
+  min-height: 30rem;
+  overflow-y: auto;
+  max-height: 30rem;
+}
+
+.AddNotas {
+  min-height: 10rem;
+  background-color: #ddd7f3;
+}
+
+.NotasFecha {
+  font-weight: bold;
+}
+
+.NotasDetalle {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
