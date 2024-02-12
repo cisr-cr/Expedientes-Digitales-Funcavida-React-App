@@ -4,6 +4,11 @@
   max-height: 30rem;
 }
 
+.Nota:hover {
+  background-color: #c9c3e6;
+  cursor: pointer;
+}
+
 .AddNotas {
   min-height: 10rem;
   background-color: #ddd7f3;
