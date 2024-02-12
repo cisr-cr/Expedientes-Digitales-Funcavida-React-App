@@ -68,10 +68,10 @@ export default function Notas() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid xs={12}>
           <Item className="Notas">
             {notes.map((note, index) => (
-              <Grid item xs={12} key={index} className="Nota">
+              <Grid xs={12} key={index} className="Nota">
                 <div className="NotasFecha">
                   {note.author} {note.date}
                 </div>
@@ -81,7 +81,7 @@ export default function Notas() {
             ))}
           </Item>
         </Grid>
-        <Grid item xs={12}>
+        <Grid xs={12}>
           <Item className="AddNotas">
             {" "}
             <Grid
