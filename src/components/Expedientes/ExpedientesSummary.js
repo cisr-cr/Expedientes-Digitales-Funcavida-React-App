@@ -7,6 +7,21 @@ import Sheet from "@mui/joy/Sheet";
 import Avatar from "@mui/joy/Avatar";
 import { useNavigate } from "react-router-dom";
 
+// Function to format date to Costa Rica locale without time
+const formatDate = (dateString) => {
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "America/Costa_Rica",
+  };
+  const costaRicaDate = new Date(dateString).toLocaleDateString(
+    "es-CR",
+    options
+  );
+  return costaRicaDate;
+};
+
 export default function ExpedientesSummary({ expediente }) {
   const [isHovered, setIsHovered] = React.useState(false);
   const navigate = useNavigate();
@@ -21,7 +36,7 @@ export default function ExpedientesSummary({ expediente }) {
 
   const handleCardClick = () => {
     console.log("Card clicked!");
-    navigate(`/expediente/${expediente.id}`);
+    navigate(`/expediente/${expediente._id}`);
   };
 
   return (
@@ -50,7 +65,7 @@ export default function ExpedientesSummary({ expediente }) {
         }}
       >
         <Avatar
-          src={expediente.ImagenURL}
+          src={expediente.InformacionPaciente.Foto}
           sx={{ "--Avatar-size": isHovered ? "6rem" : "5rem", margin: "auto" }}
         />
         <CardContent>
@@ -69,26 +84,32 @@ export default function ExpedientesSummary({ expediente }) {
               <Typography level="body-xs" fontWeight="lg">
                 Nombre
               </Typography>
-              <Typography fontWeight="lg">{expediente.Nombre}</Typography>
+              <Typography variant="body2">
+                {expediente.InformacionPaciente.Nombre}
+              </Typography>
             </div>
             <div>
               <Typography level="body-xs" fontWeight="lg">
-                Cedula
+                Cédula
               </Typography>
-              <Typography fontWeight="lg">{expediente.Cedula}</Typography>
+              <Typography variant="body2">
+                {expediente.InformacionPaciente.Cedula}
+              </Typography>
             </div>
             <div>
               <Typography level="body-xs" fontWeight="lg">
                 Estado
               </Typography>
-              <Typography fontWeight="lg">{expediente.Estado}</Typography>
+              <Typography variant="body2">
+                {expediente.InformacionGeneral.EstadoExpediente}
+              </Typography>
             </div>
             <div>
               <Typography level="body-xs" fontWeight="lg">
                 Ultima Actualizacion
               </Typography>
-              <Typography fontWeight="lg">
-                {expediente.UltimaActualizacion}
+              <Typography variant="body2">
+                {formatDate(expediente.InformacionGeneral.UltimaActualizacion)}
               </Typography>
             </div>
           </Sheet>

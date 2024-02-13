@@ -4,7 +4,22 @@ import "./ExpedienteInfo.css";
 import Avatar from "@mui/joy/Avatar";
 import Typography from "@mui/joy/Typography";
 
-export default function ExpedienteInfo() {
+// Function to format date to Costa Rica locale without time
+const formatDate = (dateString) => {
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "America/Costa_Rica",
+  };
+  const costaRicaDate = new Date(dateString).toLocaleDateString(
+    "es-CR",
+    options
+  );
+  return costaRicaDate;
+};
+
+export default function ExpedienteInfo({ clickedExpediente }) {
   return (
     <Grid
       className="ExpedienteGrid"
@@ -22,31 +37,41 @@ export default function ExpedienteInfo() {
         <Typography level="body-xs" fontWeight="lg">
           Nombre
         </Typography>
-        <Typography fontWeight="lg">Liam Taylor</Typography>
+        <Typography fontWeight="lg">
+          {clickedExpediente.InformacionPaciente.Nombre}
+        </Typography>
       </Grid>
       <Grid>
         <Typography level="body-xs" fontWeight="lg">
           Cedula
         </Typography>
-        <Typography fontWeight="lg">123456789</Typography>
+        <Typography fontWeight="lg">
+          {clickedExpediente.InformacionPaciente.Cedula}
+        </Typography>
       </Grid>
       <Grid>
         <Typography level="body-xs" fontWeight="lg">
           Diagnostico
         </Typography>
-        <Typography fontWeight="lg">Cáncer de pulmón</Typography>
+        <Typography fontWeight="lg">
+          {clickedExpediente.HistoriaMedica.Diagnostico}
+        </Typography>
       </Grid>
       <Grid>
         <Typography level="body-xs" fontWeight="lg">
           Estado
         </Typography>
-        <Typography fontWeight="lg">Activo</Typography>
+        <Typography fontWeight="lg">
+          {clickedExpediente.InformacionGeneral.EstadoExpediente}
+        </Typography>
       </Grid>
       <Grid>
         <Typography level="body-xs" fontWeight="lg">
           Ultima Actualizacion de expediente
         </Typography>
-        <Typography fontWeight="lg">10 dias</Typography>
+        <Typography fontWeight="lg">
+          {formatDate(clickedExpediente.InformacionGeneral.UltimaActualizacion)}
+        </Typography>
       </Grid>
       <Grid>
         <Typography level="body-xs" fontWeight="lg">
