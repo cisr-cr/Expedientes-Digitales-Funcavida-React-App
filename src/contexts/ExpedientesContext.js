@@ -8,7 +8,7 @@ export function useExpedientes() {
 
 export function ExpedientesProvider({ children }) {
   const [expedientes, setExpedientes] = useState([]);
-  const [clickedExpediente, setClickedExpediente] = useState({});
+  const [clickedExpediente, setClickedExpediente] = useState();
 
   async function handleGetExpedientes() {
     try {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useParams } from "react-router-dom";
 import ExpedienteInfo from "./ExpedienteInfo";

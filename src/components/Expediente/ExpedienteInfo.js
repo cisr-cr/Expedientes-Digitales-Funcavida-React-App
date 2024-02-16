@@ -19,6 +19,23 @@ const formatDate = (dateString) => {
   return costaRicaDate;
 };
 
+function calculateAge(dateOfBirth) {
+  const dob = new Date(dateOfBirth);
+  const today = new Date();
+
+  let age = today.getFullYear() - dob.getFullYear();
+
+  // Check if the birthday has occurred this year
+  if (
+    today.getMonth() < dob.getMonth() ||
+    (today.getMonth() === dob.getMonth() && today.getDate() < dob.getDate())
+  ) {
+    age--;
+  }
+
+  return age;
+}
+
 export default function ExpedienteInfo({ clickedExpediente }) {
   return (
     <Grid
@@ -37,31 +54,25 @@ export default function ExpedienteInfo({ clickedExpediente }) {
         <Typography level="body-xs" fontWeight="lg">
           Nombre
         </Typography>
-        <Typography fontWeight="lg">
-          {clickedExpediente.InformacionPaciente.Nombre}
-        </Typography>
+        <Typography>{clickedExpediente.InformacionPaciente.Nombre}</Typography>
       </Grid>
       <Grid>
         <Typography level="body-xs" fontWeight="lg">
           Cedula
         </Typography>
-        <Typography fontWeight="lg">
-          {clickedExpediente.InformacionPaciente.Cedula}
-        </Typography>
+        <Typography>{clickedExpediente.InformacionPaciente.Cedula}</Typography>
       </Grid>
       <Grid>
         <Typography level="body-xs" fontWeight="lg">
           Diagnostico
         </Typography>
-        <Typography fontWeight="lg">
-          {clickedExpediente.HistoriaMedica.Diagnostico}
-        </Typography>
+        <Typography>{clickedExpediente.HistoriaMedica.Diagnostico}</Typography>
       </Grid>
       <Grid>
         <Typography level="body-xs" fontWeight="lg">
           Estado
         </Typography>
-        <Typography fontWeight="lg">
+        <Typography>
           {clickedExpediente.InformacionGeneral.EstadoExpediente}
         </Typography>
       </Grid>
@@ -69,7 +80,7 @@ export default function ExpedienteInfo({ clickedExpediente }) {
         <Typography level="body-xs" fontWeight="lg">
           Ultima Actualizacion de expediente
         </Typography>
-        <Typography fontWeight="lg">
+        <Typography>
           {formatDate(clickedExpediente.InformacionGeneral.UltimaActualizacion)}
         </Typography>
       </Grid>
@@ -77,31 +88,41 @@ export default function ExpedienteInfo({ clickedExpediente }) {
         <Typography level="body-xs" fontWeight="lg">
           Edad
         </Typography>
-        <Typography fontWeight="lg">48</Typography>
+        <Typography>
+          {calculateAge(clickedExpediente.InformacionPaciente.DOB)}
+        </Typography>
       </Grid>
       <Grid>
         <Typography level="body-xs" fontWeight="lg">
           Fecha de nacimiento
         </Typography>
-        <Typography fontWeight="lg">12/12/75</Typography>
+        <Typography>
+          {formatDate(clickedExpediente.InformacionPaciente.DOB)}
+        </Typography>
       </Grid>
       <Grid>
         <Typography level="body-xs" fontWeight="lg">
           Correo Electronico
         </Typography>
-        <Typography fontWeight="lg">juan@example.com</Typography>
+        <Typography>
+          {clickedExpediente.InformacionPaciente.CorreoElectronico}
+        </Typography>
       </Grid>
       <Grid>
         <Typography level="body-xs" fontWeight="lg">
           Telefono
         </Typography>
-        <Typography fontWeight="lg">12345678</Typography>
+        <Typography>
+          {clickedExpediente.InformacionPaciente.Telefono}
+        </Typography>
       </Grid>
       <Grid>
         <Typography level="body-xs" fontWeight="lg">
           Direccion
         </Typography>
-        <Typography fontWeight="lg">Calle Principal #123</Typography>
+        <Typography>
+          {clickedExpediente.InformacionPaciente.Direccion}
+        </Typography>
       </Grid>
     </Grid>
   );
