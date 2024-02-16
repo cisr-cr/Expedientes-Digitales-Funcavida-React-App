@@ -46,7 +46,7 @@ export default function ExpedienteInfo({ clickedExpediente }) {
     >
       <Grid>
         <Avatar
-          src="https://gravatar.com/avatar/a70abbf760cc113f06bc7f2c0a51dfb4?s=400&d=robohash&r=x"
+          src={clickedExpediente.InformacionPaciente.Foto}
           sx={{ "--Avatar-size": "10rem", margin: "auto" }}
         />
       </Grid>

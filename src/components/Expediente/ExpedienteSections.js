@@ -5,8 +5,9 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Notas from "../Sections/Notas";
+import InfoPersonal from "../Sections/InfoPersonal";
 
-export default function ExpedienteSections() {
+export default function ExpedienteSections({ clickedExpediente }) {
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
@@ -43,9 +44,11 @@ export default function ExpedienteSections() {
           </TabList>
         </Box>
         <TabPanel value="1" sx={{ height: "80%" }}>
-          <Notas />
+          <Notas notas={clickedExpediente.Notas} />
         </TabPanel>
-        <TabPanel value="2">Item Two</TabPanel>
+        <TabPanel value="2" sx={{ height: "80%" }}>
+          <InfoPersonal infoPersonal={clickedExpediente} />
+        </TabPanel>
         <TabPanel value="3">Item Three</TabPanel>
         <TabPanel value="4">Item Four</TabPanel>
         <TabPanel value="5">Item Five</TabPanel>
