@@ -57,6 +57,10 @@ export function ExpedientesProvider({ children }) {
     }
   }
 
+  async function handleSaveExpediente() {
+    //logic to save expediete
+  }
+
   useEffect(() => {
     let abortController = new AbortController();
     handleGetExpedientes();
