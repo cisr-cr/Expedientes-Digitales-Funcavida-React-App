@@ -16,69 +16,25 @@ const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#FFF",
 }));
 
-const notes = [
-  {
-    note: "Paciente respondiendo positivamente al tratamiento de quimioterapia. No se observan efectos secundarios significativos. Continuar con la dosis programada.",
-    date: "2024-01-31",
-    author: "D. Martínez",
-  },
-  {
-    note: "Revisión de los resultados de los análisis de sangre. Los niveles de hemoglobina han mejorado, pero se observa una ligera disminución en los glóbulos blancos. Se ajustará la medicación.",
-    date: "2024-02-15",
-    author: "S. Rodríguez",
-  },
-  {
-    note: "Consulta con el oncólogo para discutir opciones de tratamiento adicionales. Se programará una sesión de radioterapia para la próxima semana.",
-    date: "2024-03-05",
-    author: "R. Gómez",
-  },
-  {
-    note: "Seguimiento post-radioterapia. El paciente presenta algunos efectos secundarios esperados, como fatiga y irritación cutánea. Se recetan medicamentos para aliviar los síntomas.",
-    date: "2024-03-20",
-    author: "L. López",
-  },
-  {
-    note: "Entrevista con el paciente para evaluar su bienestar emocional. Se recomienda apoyo psicológico adicional. Se refiere al paciente a un consejero especializado.",
-    date: "2024-04-10",
-    author: "E. García",
-  },
-  {
-    note: "Resultados de la prueba de imagen indican reducción del tamaño del tumor. Excelente progreso en el tratamiento actual.",
-    date: "2024-05-02",
-    author: "F. Ramírez",
-  },
-  {
-    note: "Cambio en el régimen de medicamentos debido a reacciones alérgicas. Se monitorizará de cerca la respuesta del paciente.",
-    date: "2024-05-15",
-    author: "P. Torres",
-  },
-  {
-    note: "Discusión sobre opciones de cirugía. Se programará una cirugía de extirpación del tumor para el próximo mes.",
-    date: "2024-06-01",
-    author: "A. Sánchez",
-  },
-  {
-    note: "Evaluación de la recuperación postoperatoria. El paciente se encuentra estable y responde bien al tratamiento postoperatorio.",
-    date: "2024-06-20",
-    author: "D. Martínez",
-  },
-];
-
-export default function Notas() {
+export default function Notas({ notas }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid xs={12}>
           <Item className="Notas">
-            {notes.map((note, index) => (
-              <Grid xs={12} key={index} className="Nota">
-                <div className="NotasFecha">
-                  {note.author} {note.date}
-                </div>
-                <div className="NotasDetalle">{note.note}</div>
-                <Divider light />
-              </Grid>
-            ))}
+            {notas && notas.length > 0 ? (
+              notas.map((note, index) => (
+                <Grid xs={12} key={index} className="Nota">
+                  <div className="NotasFecha">
+                    {note.author} {note.date}
+                  </div>
+                  <div className="NotasDetalle">{note.note}</div>
+                  <Divider light />
+                </Grid>
+              ))
+            ) : (
+              <div className="NoNotasMessage">No hay notas disponibles ❌</div>
+            )}
           </Item>
         </Grid>
         <Grid xs={12}>

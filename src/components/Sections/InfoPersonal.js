@@ -13,6 +13,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel"; // Import InputLabel
+import FormControl from "@mui/material/FormControl";
 
 const formatDate = (dateString) => {
   const options = {
@@ -124,28 +126,33 @@ const InfoPersonal = ({ infoPersonal }) => {
                   disabled={!isEditing}
                   style={{ marginBottom: "16px" }}
                 />
-                <Select
-                  label="Estado"
-                  fullWidth
-                  value={
-                    clickedExpediente.InformacionGeneral.EstadoExpediente ===
-                    "Activo"
-                      ? 1
-                      : 0
-                  }
-                  onChange={(e) =>
-                    handleChange(
-                      "InformacionGeneral.EstadoExpediente",
-                      e.target.value === 1 ? "Activo" : "Inactivo"
-                    )
-                  }
-                  disabled={!isEditing}
-                  style={{ marginBottom: "16px" }}
-                  sx={{ textAlign: "left" }}
-                >
-                  <MenuItem value={1}>Activo</MenuItem>
-                  <MenuItem value={0}>Inactivo</MenuItem>
-                </Select>
+                <FormControl fullWidth>
+                  <InputLabel disabled={!isEditing} id="estado-label">
+                    Estado
+                  </InputLabel>{" "}
+                  <Select
+                    label="Estado"
+                    fullWidth
+                    value={
+                      clickedExpediente.InformacionGeneral.EstadoExpediente ===
+                      "Activo"
+                        ? 1
+                        : 0
+                    }
+                    onChange={(e) =>
+                      handleChange(
+                        "InformacionGeneral.EstadoExpediente",
+                        e.target.value === 1 ? "Activo" : "Inactivo"
+                      )
+                    }
+                    disabled={!isEditing}
+                    style={{ marginBottom: "16px" }}
+                    sx={{ textAlign: "left" }}
+                  >
+                    <MenuItem value={1}>Activo</MenuItem>
+                    <MenuItem value={0}>Inactivo</MenuItem>
+                  </Select>
+                </FormControl>
                 <TextField
                   label="Última Actualización de Expediente"
                   fullWidth
