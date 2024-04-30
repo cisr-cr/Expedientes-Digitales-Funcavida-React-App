@@ -7,7 +7,10 @@ import TabPanel from "@mui/lab/TabPanel";
 import Notas from "../Sections/Notas";
 import InfoPersonal from "../Sections/InfoPersonal";
 
-export default function ExpedienteSections({ clickedExpediente }) {
+export default function ExpedienteSections({
+  clickedExpediente,
+  handleSaveExpediente,
+}) {
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
@@ -47,7 +50,10 @@ export default function ExpedienteSections({ clickedExpediente }) {
           <Notas notas={clickedExpediente.Notas} />
         </TabPanel>
         <TabPanel value="2" sx={{ height: "80%" }}>
-          <InfoPersonal infoPersonal={clickedExpediente} />
+          <InfoPersonal
+            infoPersonal={clickedExpediente}
+            handleSaveExpediente={handleSaveExpediente}
+          />
         </TabPanel>
         <TabPanel value="3">Item Three</TabPanel>
         <TabPanel value="4">Item Four</TabPanel>

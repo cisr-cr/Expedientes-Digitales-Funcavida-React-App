@@ -58,7 +58,41 @@ export function ExpedientesProvider({ children }) {
   }
 
   async function handleSaveExpediente() {
-    //logic to save expediete
+    console.log("Saving!!");
+    if (!clickedExpediente) {
+      console.error("No expediente selected to save.");
+      return;
+    }
+
+    // Create a copy of the clickedExpediente object without the __id key
+    const { _id, ...expedienteData } = clickedExpediente;
+
+    console.log("expedienteData", expedienteData);
+
+    try {
+      const response = await fetch(
+        `http://localhost:9000/api/expediente/${clickedExpediente._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(expedienteData), // Send the modified object without the __id key
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const updatedExpediente = await response.json();
+      console.log("Expediente updated:", updatedExpediente);
+
+      // Optionally, you can update the clickedExpediente state with the updated data
+      setClickedExpediente(updatedExpediente);
+    } catch (error) {
+      console.error("Error updating expediente:", error.message);
+    }
   }
 
   useEffect(() => {
@@ -72,6 +106,7 @@ export function ExpedientesProvider({ children }) {
   const value = {
     handleGetExpedientes,
     handleClickExpediente,
+    handleSaveExpediente,
     expedientes,
     clickedExpediente,
   };

@@ -47,7 +47,7 @@ function calculateAge(dateOfBirth) {
   return age;
 }
 
-const InfoPersonal = ({ infoPersonal }) => {
+const InfoPersonal = ({ infoPersonal, handleSaveExpediente }) => {
   // Initial state with sample data
   const [clickedExpediente, setClickedExpediente] = useState(infoPersonal);
   const [value, setValue] = React.useState(
@@ -66,6 +66,7 @@ const InfoPersonal = ({ infoPersonal }) => {
     // For simplicity, we'll just toggle back to view mode in this example
     setIsEditing(false);
     console.log("clickedExpediente", clickedExpediente);
+    handleSaveExpediente();
   };
 
   const handleChange = (path, value) => {

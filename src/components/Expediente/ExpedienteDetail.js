@@ -8,7 +8,8 @@ import { useExpedientes } from "../../contexts/ExpedientesContext";
 
 export default function ExpedienteDetail() {
   let { id } = useParams();
-  const { handleClickExpediente, clickedExpediente } = useExpedientes();
+  const { handleClickExpediente, clickedExpediente, handleSaveExpediente } =
+    useExpedientes();
 
   useEffect(() => {
     let abortController = new AbortController();
@@ -16,7 +17,7 @@ export default function ExpedienteDetail() {
     return () => {
       abortController.abort();
     };
-  }, []);
+  }, [handleClickExpediente, id]);
 
   return (
     <Box sx={{ padding: 2, height: "100%" }}>
@@ -26,7 +27,10 @@ export default function ExpedienteDetail() {
             <ExpedienteInfo clickedExpediente={clickedExpediente} />
           </Grid>
           <Grid xs={9}>
-            <ExpedienteSections clickedExpediente={clickedExpediente} />
+            <ExpedienteSections
+              clickedExpediente={clickedExpediente}
+              handleSaveExpediente={handleSaveExpediente}
+            />
           </Grid>
         </Grid>
       )}
