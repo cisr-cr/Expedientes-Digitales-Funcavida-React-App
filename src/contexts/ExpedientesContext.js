@@ -64,6 +64,9 @@ export function ExpedientesProvider({ children }) {
       return;
     }
 
+    clickedExpediente.InformacionGeneral.UltimaActualizacion =
+      new Date().toISOString();
+
     // Create a copy of the clickedExpediente object without the __id key
     const { _id, ...expedienteData } = clickedExpediente;
 
@@ -87,7 +90,7 @@ export function ExpedientesProvider({ children }) {
 
       const updatedExpediente = await response.json();
       console.log("Expediente updated:", updatedExpediente);
-
+      console.log("expedientes", expedientes);
       // Optionally, you can update the clickedExpediente state with the updated data
       setClickedExpediente(updatedExpediente);
     } catch (error) {
