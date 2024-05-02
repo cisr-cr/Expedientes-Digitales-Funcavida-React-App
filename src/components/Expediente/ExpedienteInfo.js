@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import "./ExpedienteInfo.css";
 import Avatar from "@mui/joy/Avatar";
@@ -37,6 +37,38 @@ function calculateAge(dateOfBirth) {
 }
 
 export default function ExpedienteInfo({ clickedExpediente }) {
+  const [avatarSrc, setAvatarSrc] = useState(
+    clickedExpediente.InformacionPaciente.Foto
+  );
+
+  //update foto
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch(
+        `http://localhost:9000/api/expedientefoto/${clickedExpediente._id}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        // Update avatar src if upload successful
+        const data = await response.json();
+        setAvatarSrc(data.InformacionPaciente.Foto);
+      } else {
+        // Handle error
+        console.error("Upload failed");
+      }
+    } catch (error) {
+      console.error("Error uploading avatar:", error);
+    }
+  };
+
   return (
     <Grid
       className="ExpedienteGrid"
@@ -45,9 +77,18 @@ export default function ExpedienteInfo({ clickedExpediente }) {
       justifyContent="space-around"
     >
       <Grid>
-        <Avatar
-          src={clickedExpediente.InformacionPaciente.Foto}
-          sx={{ "--Avatar-size": "10rem", margin: "auto" }}
+        <label htmlFor="avatarInput">
+          <Avatar
+            src={avatarSrc}
+            sx={{ "--Avatar-size": "10rem", margin: "auto" }}
+          />
+        </label>
+        <input
+          id="avatarInput"
+          type="file"
+          accept="image/*"
+          style={{ display: "none" }}
+          onChange={handleFileChange}
         />
       </Grid>
       <Grid>
