@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
+import { useNavigate } from "react-router-dom";
 
 const pages = [];
 const settings = ["Expedientes Archivados", "Cerrar Sesión"];
@@ -19,6 +20,7 @@ const settings = ["Expedientes Archivados", "Cerrar Sesión"];
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -35,6 +37,10 @@ function Header() {
     setAnchorElUser(null);
   };
 
+  const handleLogoClick = () => {
+    navigate("/");
+  };
+
   return (
     <AppBar
       className="Header"
@@ -47,7 +53,7 @@ function Header() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            onClick={handleLogoClick}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -56,6 +62,9 @@ function Header() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              "&:hover": {
+                cursor: "pointer",
+              },
             }}
           >
             FUNCAVIDA
