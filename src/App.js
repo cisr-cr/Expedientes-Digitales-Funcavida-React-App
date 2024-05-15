@@ -6,20 +6,26 @@ import ExpedientesList from "./components/Expedientes/ExpedientesList";
 import ExpedienteDetail from "./components/Expediente/ExpedienteDetail";
 import NoMatch from "./components/NoMatch";
 import { ExpedientesProvider } from "./contexts/ExpedientesContext";
+import Login from "./components/Login/Login";
+import { AuthProvider } from "./contexts/AuthenticationContext";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <ExpedientesProvider>
-          <Header />
-          <Routes>
-            <Route path="/" element={<ExpedientesContainer />}>
-              <Route index element={<ExpedientesList />} />
-              <Route path="expediente/:id" element={<ExpedienteDetail />} />
-              <Route path="*" element={<NoMatch />} />
-            </Route>
-          </Routes>
+          <AuthProvider>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Login />}>
+                <Route path="/expedientes" element={<ExpedientesContainer />}>
+                  <Route index element={<ExpedientesList />} />
+                  <Route path="expediente/:id" element={<ExpedienteDetail />} />
+                  <Route path="*" element={<NoMatch />} />
+                </Route>
+              </Route>
+            </Routes>
+          </AuthProvider>
         </ExpedientesProvider>
       </BrowserRouter>
     </div>

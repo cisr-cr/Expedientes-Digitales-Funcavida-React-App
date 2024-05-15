@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthenticationContext";
 
 const pages = [];
 const settings = ["Expedientes Archivados", "Cerrar Sesión"];
@@ -20,6 +21,7 @@ const settings = ["Expedientes Archivados", "Cerrar Sesión"];
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const auth = useAuth();
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
@@ -41,7 +43,7 @@ function Header() {
     navigate("/");
   };
 
-  return (
+  return auth.user ? (
     <AppBar
       className="Header"
       elevation={0}
@@ -169,6 +171,6 @@ function Header() {
         </Toolbar>
       </Container>
     </AppBar>
-  );
+  ) : null;
 }
 export default Header;
