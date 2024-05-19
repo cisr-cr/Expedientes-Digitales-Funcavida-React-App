@@ -7,7 +7,6 @@ import Sheet from "@mui/joy/Sheet";
 import Avatar from "@mui/joy/Avatar";
 import { useNavigate } from "react-router-dom";
 
-// Function to format date to Costa Rica locale without time
 const formatDate = (dateString) => {
   const options = {
     year: "numeric",
@@ -15,11 +14,7 @@ const formatDate = (dateString) => {
     day: "numeric",
     timeZone: "America/Costa_Rica",
   };
-  const costaRicaDate = new Date(dateString).toLocaleDateString(
-    "es-CR",
-    options
-  );
-  return costaRicaDate;
+  return new Date(dateString).toLocaleDateString("es-CR", options);
 };
 
 export default function ExpedientesSummary({ expediente }) {
@@ -35,17 +30,11 @@ export default function ExpedientesSummary({ expediente }) {
   };
 
   const handleCardClick = () => {
-    console.log("Card clicked!");
     navigate(`/expediente/${expediente._id}`);
   };
 
   return (
-    <Box
-      sx={{
-        width: "97%",
-      }}
-      onClick={handleCardClick}
-    >
+    <Box sx={{ width: "96%", mb: 2 }} onClick={handleCardClick}>
       <Card
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
@@ -61,12 +50,14 @@ export default function ExpedientesSummary({ expediente }) {
             minWidth:
               "clamp(0px, (calc(var(--stack-point) - 2 * var(--Card-padding) - 2 * var(--variant-borderWidth, 0px)) + 1px - 100%) * 999, 100%)",
           },
-          resize: "horizontal",
         }}
       >
         <Avatar
           src={expediente.InformacionPaciente.Foto}
-          sx={{ "--Avatar-size": isHovered ? "6rem" : "5rem", margin: "auto" }}
+          sx={{
+            "--Avatar-size": isHovered ? "6rem" : "5rem",
+            margin: "auto",
+          }}
         />
         <CardContent>
           <Sheet
@@ -106,7 +97,7 @@ export default function ExpedientesSummary({ expediente }) {
             </div>
             <div>
               <Typography level="body-xs" fontWeight="lg">
-                Ultima Actualizacion
+                Última Actualización
               </Typography>
               <Typography variant="body2">
                 {formatDate(expediente.InformacionGeneral.UltimaActualizacion)}

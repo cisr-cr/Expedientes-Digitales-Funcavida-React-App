@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 function DerechosDeAutor(props) {
   return (
-    <Typography variant="body2" color="primary" align="center" {...props}>
+    <Typography variant="body2" color="textSecondary" align="center" {...props}>
       {"Derechos de autor © "}
       <Link color="inherit" href="https://funcavida.org/">
         Funcavida
@@ -27,13 +27,21 @@ function DerechosDeAutor(props) {
 }
 
 const defaultTheme = createTheme({
-  typography: {
-    fontFamily: "'Roboto', sans-serif",
-    color: "#ffffff", // Set all text to white
-  },
   palette: {
     primary: {
-      main: "#ffffff", // Set primary color to white
+      main: "#ffffff",
+    },
+    background: {
+      default: "transparent",
+    },
+  },
+  typography: {
+    fontFamily: "'Roboto', sans-serif",
+    h5: {
+      color: "#ffffff",
+    },
+    body2: {
+      color: "#ffffff",
     },
   },
   components: {
@@ -41,7 +49,30 @@ const defaultTheme = createTheme({
       styleOverrides: {
         root: {
           "&:hover": {
-            backgroundColor: "#2196f3", // Set hover background to transparent
+            backgroundColor: "#2196f3",
+          },
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiInputBase-input": {
+            color: "#ffffff",
+          },
+          "& .MuiInputLabel-root": {
+            color: "#ffffff",
+          },
+          "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+              borderColor: "#ffffff",
+            },
+            "&:hover fieldset": {
+              borderColor: "#2196f3",
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: "#ffffff",
+            },
           },
         },
       },
@@ -52,7 +83,6 @@ const defaultTheme = createTheme({
 export default function Login() {
   const auth = useAuth();
   const navigate = useNavigate();
-  console.log("auth:" + auth);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -61,19 +91,13 @@ export default function Login() {
   };
 
   const handleGoogleSignIn = () => {
-    // Handle Google Sign In logic here
     console.log("Signing in with Google...");
   };
 
   useEffect(() => {
-    let abortController = new AbortController();
     if (auth.user) {
-      console.log("Should be redirecting...");
       navigate("/");
     }
-    return () => {
-      abortController.abort();
-    };
   }, [auth.user, navigate]);
 
   return (
@@ -86,15 +110,15 @@ export default function Login() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            backgroundColor: "inherit", // orange background color
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
             padding: "20px",
             borderRadius: "10px",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+          <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+            <LockOutlinedIcon color="secondary" />
           </Avatar>
-          <Typography component="h1" variant="h5" color="primary">
+          <Typography component="h1" variant="h5">
             Iniciar sesión
           </Typography>
           <Box
@@ -112,14 +136,6 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
-              InputProps={{
-                // Set text color to white
-                style: { color: "#ffffff" },
-              }}
-              InputLabelProps={{
-                // Set label color to white
-                style: { color: "#ffffff" },
-              }}
             />
             <TextField
               margin="normal"
@@ -130,16 +146,7 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
-              InputProps={{
-                // Set text color to white
-                style: { color: "#ffffff" },
-              }}
-              InputLabelProps={{
-                // Set label color to white
-                style: { color: "#ffffff" },
-              }}
             />
-
             <Button
               type="submit"
               fullWidth
@@ -152,7 +159,11 @@ export default function Login() {
               fullWidth
               variant="contained"
               onClick={handleGoogleSignIn}
-              sx={{ mt: 1 }}
+              sx={{
+                mt: 1,
+                bgcolor: "#4285F4",
+                "&:hover": { bgcolor: "#357AE8" },
+              }}
               endIcon={<GoogleIcon />}
             >
               Iniciar sesión con Google
