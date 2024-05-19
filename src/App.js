@@ -8,25 +8,46 @@ import NoMatch from "./components/NoMatch";
 import { ExpedientesProvider } from "./contexts/ExpedientesContext";
 import Login from "./components/Login/Login";
 import { AuthProvider } from "./contexts/AuthenticationContext";
+import RequireAuth from "./utils/RequireAuth";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <ExpedientesProvider>
-          <AuthProvider>
+        <AuthProvider>
+          <ExpedientesProvider>
             <Header />
             <Routes>
-              <Route path="/" element={<Login />}>
-                <Route path="/expedientes" element={<ExpedientesContainer />}>
-                  <Route index element={<ExpedientesList />} />
-                  <Route path="expediente/:id" element={<ExpedienteDetail />} />
-                  <Route path="*" element={<NoMatch />} />
-                </Route>
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="/"
+                element={
+                  <RequireAuth>
+                    <ExpedientesContainer />
+                  </RequireAuth>
+                }
+              >
+                <Route
+                  index
+                  element={
+                    <RequireAuth>
+                      <ExpedientesList />
+                    </RequireAuth>
+                  }
+                />
+                <Route
+                  path="expediente/:id"
+                  element={
+                    <RequireAuth>
+                      <ExpedienteDetail />
+                    </RequireAuth>
+                  }
+                />
+                <Route path="*" element={<NoMatch />} />
               </Route>
             </Routes>
-          </AuthProvider>
-        </ExpedientesProvider>
+          </ExpedientesProvider>
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );

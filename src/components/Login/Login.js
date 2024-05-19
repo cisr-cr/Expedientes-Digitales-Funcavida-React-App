@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth } from "../../contexts/AuthenticationContext";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function DerechosDeAutor(props) {
   return (
@@ -51,15 +51,13 @@ const defaultTheme = createTheme({
 
 export default function Login() {
   const auth = useAuth();
+  const navigate = useNavigate();
   console.log("auth:" + auth);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    auth.signin(data.get("email"), data.get("password"));
   };
 
   const handleGoogleSignIn = () => {
@@ -70,12 +68,13 @@ export default function Login() {
   useEffect(() => {
     let abortController = new AbortController();
     if (auth.user) {
-      return redirect("/expedientes");
+      console.log("Should be redirecting...");
+      navigate("/");
     }
     return () => {
       abortController.abort();
     };
-  }, [auth.user]);
+  }, [auth.user, navigate]);
 
   return (
     <ThemeProvider theme={defaultTheme}>

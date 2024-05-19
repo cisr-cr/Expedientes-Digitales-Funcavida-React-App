@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useAuth } from "./AuthenticationContext"; // Adjust the path as necessary
 
 const ExpedientesContext = createContext();
 
@@ -9,8 +10,13 @@ export function useExpedientes() {
 export function ExpedientesProvider({ children }) {
   const [expedientes, setExpedientes] = useState([]);
   const [clickedExpediente, setClickedExpediente] = useState();
+  const auth = useAuth();
 
   async function handleGetExpedientes() {
+    if (!auth.user) {
+      return; // Do not fetch expedientes if user is not authenticated
+    }
+
     try {
       const response = await fetch("http://localhost:9000/api/expedientes");
       if (!response.ok) {
@@ -100,11 +106,13 @@ export function ExpedientesProvider({ children }) {
 
   useEffect(() => {
     let abortController = new AbortController();
-    handleGetExpedientes();
+    if (auth.user) {
+      handleGetExpedientes();
+    }
     return () => {
       abortController.abort();
     };
-  }, []);
+  }, [auth.user]);
 
   const value = {
     handleGetExpedientes,

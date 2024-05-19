@@ -11,7 +11,7 @@ import {
 
 import { firebaseApp } from "../utils/firebase";
 
-import { redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 // Initialize Firebase auth
 const auth = getAuth(firebaseApp);
@@ -72,30 +72,6 @@ export function AuthProvider({ children }) {
 
   return <authContext.Provider value={value}>{children}</authContext.Provider>;
 }
-
-// A Higher Order Component for requiring authentication
-export const requireAuth = (Component) => {
-  return function RequireAuthHOC(props) {
-    // Get authenticated user
-    const auth = useAuth();
-
-    useEffect(() => {
-      // Redirect if not signed in
-      if (auth.user === false) {
-        return redirect("/auth/signin");
-      }
-    }, [auth]);
-
-    // Show loading indicator
-    // We're either loading (user is `null`) or about to redirect from above `useEffect` (user is `false`)
-    if (!auth.user) {
-      return <h1>LOADING!</h1>; //<PageLoader />;
-    }
-
-    // Render component now that we have user
-    return <Component {...props} />;
-  };
-};
 
 const authProviders = [
   {

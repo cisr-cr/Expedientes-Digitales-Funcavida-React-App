@@ -43,6 +43,12 @@ function Header() {
     navigate("/");
   };
 
+  const handleLogout = () => {
+    // Execute the specific function you want on logout
+    auth.signout();
+    navigate("/login");
+  };
+
   return auth.user ? (
     <AppBar
       className="Header"
@@ -162,7 +168,15 @@ function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => {
+                    handleCloseUserMenu();
+                    if (setting === "Cerrar Sesión") {
+                      handleLogout();
+                    }
+                  }}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
@@ -173,4 +187,5 @@ function Header() {
     </AppBar>
   ) : null;
 }
+
 export default Header;
