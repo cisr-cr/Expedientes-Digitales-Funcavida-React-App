@@ -92,6 +92,7 @@ export default function Login() {
 
   const handleGoogleSignIn = () => {
     console.log("Signing in with Google...");
+    auth.signinWithProvider("google");
   };
 
   useEffect(() => {

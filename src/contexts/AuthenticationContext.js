@@ -11,8 +11,6 @@ import {
 
 import { firebaseApp } from "../utils/firebase";
 
-import { Navigate } from "react-router-dom";
-
 // Initialize Firebase auth
 const auth = getAuth(firebaseApp);
 
