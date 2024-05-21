@@ -17,7 +17,7 @@ export default function ExpedientesList() {
         <Divider />
       </Grid>
       <Grid xs={12}>
-        <Box sx={{ maxHeight: "650px", overflowY: "auto", width: "100%" }}>
+        <Box sx={{ maxHeight: "45rem", overflowY: "auto", width: "100%" }}>
           <Grid container spacing={2}>
             {expedientes.map((expediente, index) => (
               <Grid key={index} xs={12}>

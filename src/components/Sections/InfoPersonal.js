@@ -92,7 +92,7 @@ const InfoPersonal = ({ infoPersonal, handleSaveExpediente }) => {
       <Grid container spacing={3}>
         <Grid xs={12}>
           <Card>
-            <div style={{ maxHeight: "44rem", overflow: "auto" }}>
+            <div style={{ overflow: "auto" }}>
               <CardContent>
                 <Typography variant="h5" gutterBottom>
                   Información del Paciente

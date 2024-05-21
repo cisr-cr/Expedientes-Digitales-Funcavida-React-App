@@ -1,5 +1,32 @@
+/* ExpedienteInfo.css */
 .ExpedienteGrid {
-  min-height: 100%;
-  background-color: #ddd7f3;
-  border-radius: 3rem;
+  /* height: 100%; */
+  background-color: rgba(221, 215, 243, 0.8); /* Slightly transparent */
+  border-radius: 2rem; /* Less rounded for a cleaner look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 20px; /* Padding inside the card for better spacing */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ExpedienteGrid .MuiGrid2-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ExpedienteGrid label {
+  cursor: pointer;
+}
+
+.ExpedienteGrid .MuiTypography-root {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.ExpedienteTitle {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
 }

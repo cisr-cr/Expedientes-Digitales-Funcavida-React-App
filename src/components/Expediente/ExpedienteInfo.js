@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
-import "./ExpedienteInfo.css";
 import Avatar from "@mui/joy/Avatar";
 import Typography from "@mui/joy/Typography";
+import "./ExpedienteInfo.css";
 
 // Function to format date to Costa Rica locale without time
 const formatDate = (dateString) => {
@@ -12,27 +12,19 @@ const formatDate = (dateString) => {
     day: "numeric",
     timeZone: "America/Costa_Rica",
   };
-  const costaRicaDate = new Date(dateString).toLocaleDateString(
-    "es-CR",
-    options
-  );
-  return costaRicaDate;
+  return new Date(dateString).toLocaleDateString("es-CR", options);
 };
 
 function calculateAge(dateOfBirth) {
   const dob = new Date(dateOfBirth);
   const today = new Date();
-
   let age = today.getFullYear() - dob.getFullYear();
-
-  // Check if the birthday has occurred this year
   if (
     today.getMonth() < dob.getMonth() ||
     (today.getMonth() === dob.getMonth() && today.getDate() < dob.getDate())
   ) {
     age--;
   }
-
   return age;
 }
 
@@ -41,7 +33,6 @@ export default function ExpedienteInfo({ clickedExpediente }) {
     clickedExpediente.InformacionPaciente.Foto
   );
 
-  //update foto
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     const formData = new FormData();
@@ -57,11 +48,9 @@ export default function ExpedienteInfo({ clickedExpediente }) {
       );
 
       if (response.ok) {
-        // Update avatar src if upload successful
         const data = await response.json();
         setAvatarSrc(data.InformacionPaciente.Foto);
       } else {
-        // Handle error
         console.error("Upload failed");
       }
     } catch (error) {
@@ -92,76 +81,82 @@ export default function ExpedienteInfo({ clickedExpediente }) {
         />
       </Grid>
       <Grid>
-        <Typography level="body-xs" fontWeight="lg">
+        <Typography level="h6" className="ExpedienteTitle">
           Nombre
         </Typography>
-        <Typography>{clickedExpediente.InformacionPaciente.Nombre}</Typography>
-      </Grid>
-      <Grid>
-        <Typography level="body-xs" fontWeight="lg">
-          Cedula
+        <Typography level="body1">
+          {clickedExpediente.InformacionPaciente.Nombre}
         </Typography>
-        <Typography>{clickedExpediente.InformacionPaciente.Cedula}</Typography>
       </Grid>
       <Grid>
-        <Typography level="body-xs" fontWeight="lg">
-          Diagnostico
+        <Typography level="h6" className="ExpedienteTitle">
+          Cédula
         </Typography>
-        <Typography>{clickedExpediente.HistoriaMedica.Diagnostico}</Typography>
+        <Typography level="body1">
+          {clickedExpediente.InformacionPaciente.Cedula}
+        </Typography>
       </Grid>
       <Grid>
-        <Typography level="body-xs" fontWeight="lg">
+        <Typography level="h6" className="ExpedienteTitle">
+          Diagnóstico
+        </Typography>
+        <Typography level="body1">
+          {clickedExpediente.HistoriaMedica.Diagnostico}
+        </Typography>
+      </Grid>
+      <Grid>
+        <Typography level="h6" className="ExpedienteTitle">
           Estado
         </Typography>
-        <Typography>
+        <Typography level="body1">
           {clickedExpediente.InformacionGeneral.EstadoExpediente}
         </Typography>
       </Grid>
       <Grid>
-        <Typography level="body-xs" fontWeight="lg">
-          Ultima Actualizacion de expediente
+        <Typography level="h6" className="ExpedienteTitle">
+          Última Actualización de Expediente
         </Typography>
-        <Typography>
+        <Typography level="body1">
           {formatDate(clickedExpediente.InformacionGeneral.UltimaActualizacion)}
         </Typography>
       </Grid>
       <Grid>
-        <Typography level="body-xs" fontWeight="lg">
+        <Typography level="h6" className="ExpedienteTitle">
           Edad
         </Typography>
-        <Typography>
+        <Typography level="body1">
           {calculateAge(clickedExpediente.InformacionPaciente.DOB)}
         </Typography>
       </Grid>
       <Grid>
-        <Typography level="body-xs" fontWeight="lg">
-          Fecha de nacimiento
+        <Typography level="h6" className="ExpedienteTitle">
+          Fecha de Nacimiento
         </Typography>
-        <Typography>
+        <Typography level="body1">
           {formatDate(clickedExpediente.InformacionPaciente.DOB)}
         </Typography>
       </Grid>
       <Grid>
-        <Typography level="body-xs" fontWeight="lg">
-          Correo Electronico
+        <Typography level="h6" className="ExpedienteTitle">
+          Correo Electrónico
         </Typography>
-        <Typography>
+        <Typography level="body1">
           {clickedExpediente.InformacionPaciente.CorreoElectronico}
         </Typography>
       </Grid>
       <Grid>
-        <Typography level="body-xs" fontWeight="lg">
-          Telefono
+        <Typography level="h6" className="ExpedienteTitle">
+          Teléfono
         </Typography>
-        <Typography>
+        <Typography level="body1">
           {clickedExpediente.InformacionPaciente.Telefono}
         </Typography>
       </Grid>
       <Grid>
-        <Typography level="body-xs" fontWeight="lg">
-          Direccion
+        <Typography level="h6" className="ExpedienteTitle">
+          Dirección
         </Typography>
-        <Typography>
+        <Typography level="body1">
           {clickedExpediente.InformacionPaciente.Direccion}
         </Typography>
       </Grid>

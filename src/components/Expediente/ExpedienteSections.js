@@ -6,6 +6,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Notas from "../Sections/Notas";
 import InfoPersonal from "../Sections/InfoPersonal";
+import "./ExpedienteSections.css";
 
 export default function ExpedienteSections({
   clickedExpediente,
@@ -18,18 +19,12 @@ export default function ExpedienteSections({
   };
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        height: "100%",
-        typography: "body1",
-      }}
-    >
+    <Box className="ExpedienteSections">
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList
             onChange={handleChange}
-            aria-label="lab API tabs example"
+            aria-label="expediente sections tabs"
             variant="scrollable"
             scrollButtons="auto"
           >
@@ -46,10 +41,10 @@ export default function ExpedienteSections({
             <Tab label="Datos Familiares" value="11" />
           </TabList>
         </Box>
-        <TabPanel value="1" sx={{ height: "80%" }}>
+        <TabPanel value="1">
           <Notas notas={clickedExpediente.Notas} />
         </TabPanel>
-        <TabPanel value="2" sx={{ height: "80%" }}>
+        <TabPanel value="2">
           <InfoPersonal
             infoPersonal={clickedExpediente}
             handleSaveExpediente={handleSaveExpediente}

@@ -1,7 +1,7 @@
 /* ExpedientesContainer.css */
 .Grid {
   width: 100%;
-  padding: 20px;
+  /* padding: 20px; */
   background-color: rgba(
     255,
     255,
@@ -14,8 +14,7 @@
 
 .Grid .MuiBox-root {
   width: 100%;
-  max-height: 650px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
 .Grid .MuiGrid2-container {

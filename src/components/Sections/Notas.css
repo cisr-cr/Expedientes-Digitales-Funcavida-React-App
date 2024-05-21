@@ -1,7 +1,7 @@
 .Notas {
   min-height: 30rem;
   overflow-y: auto;
-  max-height: 30rem;
+  max-height: 45rem;
 }
 
 .Nota:hover {

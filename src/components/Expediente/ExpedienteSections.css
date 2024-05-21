@@ -1,0 +1,16 @@
+/* ExpedienteSections.css */
+.ExpedienteSections {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+}
+
+/* .ExpedienteSections .MuiBox-root {
+  border-bottom: 1px solid #e0e0e0;
+} */
+
+/* .ExpedienteSections .MuiTabPanel-root {
+  height: 100%;
+} */

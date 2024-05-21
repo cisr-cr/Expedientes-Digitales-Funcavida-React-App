@@ -21,6 +21,7 @@ const settings = ["Expedientes Archivados", "Cerrar Sesión"];
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [scrollY, setScrollY] = useState(0);
   const auth = useAuth();
   const navigate = useNavigate();
 
@@ -44,24 +45,34 @@ function Header() {
   };
 
   const handleLogout = () => {
-    // Execute the specific function you want on logout
     auth.signout();
     navigate("/login");
   };
 
+  const handleScroll = () => {
+    setScrollY(window.scrollY);
+  };
+
   useEffect(() => {
-    let abortController = new AbortController();
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      abortController.abort();
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [auth.user]);
+  }, []);
 
   return (
     auth.user && (
       <AppBar
         className="Header"
         elevation={0}
-        sx={{ backgroundColor: "inherit" }}
+        sx={{
+          backgroundColor: "inherit",
+          position: "fixed",
+          top: 0,
+          zIndex: 1300,
+          transition: "opacity 0.2s",
+          opacity: 1 - scrollY / 30,
+        }}
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>

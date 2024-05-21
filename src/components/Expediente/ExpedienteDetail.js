@@ -5,6 +5,7 @@ import ExpedienteInfo from "./ExpedienteInfo";
 import ExpedienteSections from "./ExpedienteSections";
 import Box from "@mui/material/Box";
 import { useExpedientes } from "../../contexts/ExpedientesContext";
+import "./ExpedienteDetail.css";
 
 export default function ExpedienteDetail() {
   let { id } = useParams();
