@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,6 +9,8 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth } from "../../contexts/AuthenticationContext";
 import { useNavigate } from "react-router-dom";
@@ -80,14 +82,49 @@ const defaultTheme = createTheme({
   },
 });
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 export default function Login() {
   const auth = useAuth();
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const [open, setOpen] = useState(false);
 
-  const handleSubmit = (event) => {
+  const isValidEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    auth.signin(data.get("email"), data.get("password"));
+    const email = data.get("email");
+    const password = data.get("password");
+
+    if (!email || !password) {
+      console.error("Email and password are required");
+      setError("Se requiere correo electrónico y contraseña");
+      setOpen(true);
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      console.error("Invalid email format");
+      setError("Formato de correo inválido.");
+      setOpen(true);
+      return;
+    }
+
+    const success = await auth.signin(email, password);
+    if (!success) {
+      console.log("ERROR!");
+      setError(
+        "No se pudo iniciar sesión. Verifique sus credenciales e inténtelo nuevamente."
+      );
+      setOpen(true);
+    }
   };
 
   const handleGoogleSignIn = () => {
@@ -100,6 +137,13 @@ export default function Login() {
       navigate("/");
     }
   }, [auth.user, navigate]);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -173,6 +217,16 @@ export default function Login() {
         </Box>
         <DerechosDeAutor sx={{ mt: 8, mb: 4 }} />
       </Container>
+      <Snackbar
+        open={open}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={handleClose} severity="error">
+          {error}
+        </Alert>
+      </Snackbar>
     </ThemeProvider>
   );
 }

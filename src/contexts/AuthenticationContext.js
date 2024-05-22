@@ -25,8 +25,17 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
   const signin = (email, password) => {
-    console.log("Made it here!");
-    return signInWithEmailAndPassword(auth, email, password).then(setUser);
+    console.log("Attempting to sign in with email:", email);
+    return signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        setUser(userCredential.user);
+        console.log("Sign-in successful", userCredential.user);
+        return true; // Indicate success
+      })
+      .catch((error) => {
+        console.error("Error signing in:", error);
+        return false; // Indicate failure
+      });
   };
 
   const signinWithProvider = (name) => {
