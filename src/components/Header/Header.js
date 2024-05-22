@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthenticationContext";
+import Divider from "@mui/material/Divider";
 
 const pages = [];
 const settings = ["Expedientes Archivados", "Cerrar Sesión"];
@@ -28,6 +29,7 @@ function Header() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -169,7 +171,7 @@ function Header() {
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
                     alt={auth.user.email}
-                    src={auth.user.photoURL ? auth.user.photoURL : ""}
+                    src={auth.user.photoURL || ""}
                   />
                 </IconButton>
               </Tooltip>
@@ -189,6 +191,10 @@ function Header() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
+                <MenuItem disabled>
+                  <Typography textAlign="center">{auth.user.email}</Typography>
+                </MenuItem>
+                <Divider />
                 {settings.map((setting) => (
                   <MenuItem
                     key={setting}

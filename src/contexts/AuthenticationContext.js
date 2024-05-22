@@ -38,10 +38,16 @@ export function AuthProvider({ children }) {
       });
   };
 
-  const signinWithProvider = (name) => {
-    // Get provider by name ("google", "facebook", etc)
-    const provider = authProviders.find((p) => p.name === name).get();
-    return signInWithPopup(auth, provider).then(setUser);
+  const signinWithProvider = async (name) => {
+    try {
+      const provider = authProviders.find((p) => p.name === name).get();
+      const result = await signInWithPopup(auth, provider);
+      setUser(result.user); // Ensure user object is updated
+      return true; // Indicate success
+    } catch (error) {
+      console.error("Error signing in with provider:", error);
+      return false; // Indicate failure
+    }
   };
 
   const signout = () => {
@@ -49,16 +55,14 @@ export function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    // Subscribe to user on mount
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUser(user);
+        setUser(user); // This should include all user properties, including photoURL
       } else {
         setUser(false);
       }
     });
 
-    // Unsubscribe on cleanup
     return () => unsubscribe();
   }, []);
 
