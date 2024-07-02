@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import Avatar from "@mui/joy/Avatar";
 import Typography from "@mui/joy/Typography";
@@ -57,6 +57,14 @@ export default function ExpedienteInfo({ clickedExpediente }) {
       console.error("Error uploading avatar:", error);
     }
   };
+
+  useEffect(() => {
+    let abortController = new AbortController();
+    setAvatarSrc(clickedExpediente.InformacionPaciente.Foto);
+    return () => {
+      abortController.abort();
+    };
+  }, [clickedExpediente]);
 
   return (
     <Grid
