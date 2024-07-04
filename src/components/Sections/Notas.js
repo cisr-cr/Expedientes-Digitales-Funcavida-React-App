@@ -7,6 +7,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
+import { useExpedientes } from "../../contexts/ExpedientesContext";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -17,6 +18,14 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Notas({ notas }) {
+  const { handleAddNota } = useExpedientes();
+  const [nota, setNota] = React.useState("");
+
+  const saveNota = () => {
+    handleAddNota(nota);
+    setNota(""); // Clear the text field after saving
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
@@ -39,7 +48,6 @@ export default function Notas({ notas }) {
         </Grid>
         <Grid xs={12}>
           <Item className="AddNotas">
-            {" "}
             <Grid
               container
               direction="row"
@@ -55,10 +63,14 @@ export default function Notas({ notas }) {
                   rows={4}
                   variant="filled"
                   fullWidth
+                  value={nota}
+                  onChange={(e) => setNota(e.target.value)}
                 />
               </Grid>
               <Grid xs={2}>
-                <Button variant="contained">Listo 🚀</Button>
+                <Button variant="contained" onClick={saveNota}>
+                  Listo 🚀
+                </Button>
               </Grid>
             </Grid>
           </Item>

@@ -104,6 +104,20 @@ export function ExpedientesProvider({ children }) {
     }
   }
 
+  async function handleAddNota(nota) {
+    if (!clickedExpediente) {
+      console.error("No expediente selected to add nota.");
+      return;
+    }
+
+    clickedExpediente.Notas.push({
+      note: nota,
+      author: auth.user.displayName || auth.user.email,
+      date: new Date().toISOString().slice(0, 10),
+    });
+    handleSaveExpediente();
+  }
+
   useEffect(() => {
     let abortController = new AbortController();
     if (auth.user) {
@@ -118,6 +132,7 @@ export function ExpedientesProvider({ children }) {
     handleGetExpedientes,
     handleClickExpediente,
     handleSaveExpediente,
+    handleAddNota,
     expedientes,
     clickedExpediente,
   };
