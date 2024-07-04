@@ -5,6 +5,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Notas from "../Sections/Notas";
+import HistorialMedico from "../Sections/HistorialMedico";
 import InfoPersonal from "../Sections/InfoPersonal";
 import "./ExpedienteSections.css";
 
@@ -30,7 +31,7 @@ export default function ExpedienteSections({
           >
             <Tab label="Notas" value="1" />
             <Tab label="Información Personal" value="2" />
-            <Tab label="Historia Médica" value="3" />
+            <Tab label="Historial Médico" value="3" />
             <Tab label="Planes de Tratamiento" value="4" />
             <Tab label="Medicamentos" value="5" />
             <Tab label="Alergias" value="6" />
@@ -50,7 +51,12 @@ export default function ExpedienteSections({
             handleSaveExpediente={handleSaveExpediente}
           />
         </TabPanel>
-        <TabPanel value="3">Item Three</TabPanel>
+        <TabPanel value="3">
+          <HistorialMedico
+            historialMedico={clickedExpediente}
+            handleSaveExpediente={handleSaveExpediente}
+          />
+        </TabPanel>
         <TabPanel value="4">Item Four</TabPanel>
         <TabPanel value="5">Item Five</TabPanel>
         <TabPanel value="6">Item Six</TabPanel>
