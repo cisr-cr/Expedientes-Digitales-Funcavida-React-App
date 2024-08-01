@@ -8,6 +8,7 @@ import Notas from "../Sections/Notas";
 import HistorialMedico from "../Sections/HistorialMedico";
 import InfoPersonal from "../Sections/InfoPersonal";
 import "./ExpedienteSections.css";
+import RutinasDeBienestar from "../Sections/RutinasDeBienestar";
 
 export default function ExpedienteSections({
   clickedExpediente,
@@ -32,14 +33,13 @@ export default function ExpedienteSections({
             <Tab label="Notas" value="1" />
             <Tab label="Información Personal" value="2" />
             <Tab label="Historial Médico" value="3" />
-            <Tab label="Planes de Tratamiento" value="4" />
-            <Tab label="Medicamentos" value="5" />
-            <Tab label="Alergias" value="6" />
-            <Tab label="Seguimiento a Largo Plazo" value="7" />
-            <Tab label="Rutinas de Ejercicio" value="8" />
-            <Tab label="Rutinas de Bienestar" value="9" />
-            <Tab label="Plan Nutricional" value="10" />
-            <Tab label="Datos Familiares" value="11" />
+            <Tab label="Rutinas de Bienestar" value="4" />
+            <Tab label="Plan Nutricional" value="5" />
+            <Tab label="Datos Familiares" value="6" />
+            <Tab label="Turismo" value="7" />
+            <Tab label="Reinserción Laboral" value="8" />
+            <Tab label="Terapias" value="9" />
+            <Tab label="Talleres ocupacionales" value="10" />
           </TabList>
         </Box>
         <TabPanel value="1">
@@ -57,14 +57,18 @@ export default function ExpedienteSections({
             handleSaveExpediente={handleSaveExpediente}
           />
         </TabPanel>
-        <TabPanel value="4">Item Four</TabPanel>
+        <TabPanel value="4">
+          <RutinasDeBienestar
+            rutinasDeBienestar={clickedExpediente}
+            handleSaveExpediente={handleSaveExpediente}
+          />
+        </TabPanel>
         <TabPanel value="5">Item Five</TabPanel>
         <TabPanel value="6">Item Six</TabPanel>
         <TabPanel value="7">Item Seven</TabPanel>
         <TabPanel value="8">Item Eight</TabPanel>
         <TabPanel value="9">Item Nine</TabPanel>
         <TabPanel value="10">Item Ten</TabPanel>
-        <TabPanel value="11">Item Eleven</TabPanel>
       </TabContext>
     </Box>
   );
