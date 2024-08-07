@@ -118,6 +118,16 @@ export function ExpedientesProvider({ children }) {
     handleSaveExpediente();
   }
 
+  async function handleSaveFamiliares(updatedFamiliares) {
+    if (!clickedExpediente) {
+      console.error("No expediente selected to add familiares.");
+      return;
+    }
+
+    clickedExpediente.familiares = updatedFamiliares;
+    handleSaveExpediente();
+  }
+
   useEffect(() => {
     let abortController = new AbortController();
     if (auth.user) {
@@ -133,6 +143,7 @@ export function ExpedientesProvider({ children }) {
     handleClickExpediente,
     handleSaveExpediente,
     handleAddNota,
+    handleSaveFamiliares,
     expedientes,
     clickedExpediente,
   };
